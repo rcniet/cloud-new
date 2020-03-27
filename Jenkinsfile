@@ -23,7 +23,7 @@ pipeline {
            steps {
                script {         
                  def customImage = docker.build('rcniet/cloud', "./docker")
-                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                 withDockerRegistry(credentialsId: 'dockerhub', toolName: 'Docker', url: 'https://hub.docker.com/signup') {
                  customImage.push("${env.BUILD_NUMBER}")
                  }                     
            }
